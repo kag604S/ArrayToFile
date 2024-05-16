@@ -1,110 +1,68 @@
 #include <iostream>
+#define SIZE 10
 #include "array.h"
-#include <stdio.h>
 #include <stdlib.h>
-FILE * fptr;
-void menu(){
-    int option;
-    printf("1.Enter value to array \n") ;
-    printf("2.Print array \n") ;
-    printf("3.Display minimum value \n") ;
-    printf("4.Display maximum value \n") ;
-    printf("5.Display average value \n") ;
-    printf("6.Add array to a file \n") ;
-    printf("7.Display array from a file \n") ;
-    printf("0. Exit Program \n") ;
-    printf("Enter Value:\n");
+using namespace std;
+
+void menu(void){
+    cout <<"1. Enter the values into the array" <<endl;
+    cout <<"2. Display the content of the array" <<endl;
+    cout <<"3. Determine the maximum value" <<endl;
+    cout <<"4. Determine the minimum value" <<endl;
+    cout <<"5. Determine the average value" <<endl;
+    cout <<"0. EXIT" <<endl;
+    cout <<"Select an option:" <<endl;
 }
-
-
 
 
 
 
 int main() {
 
+
     int array[SIZE] = {1, 2, 3, 4, 5, 6, 7 ,8, 9, 10};
-    int i, aSize;
-    int max = 0;
-    int min = 0;
-    float avg= 0;
-    int option;
 
+    int option = 0;
+    int max;
+    int min;
+    float avg;
 
-
-    do {
-
+    do{
         menu();
-        scanf("%d", &option);
-
-        switch (option) {
+        cin >> option;
+        switch (option){
+            case 0:
+                break;
             case 1:
-                printf("Entering values to the array\n");
+                cout <<"1. Enter the values into the array" <<endl;
                 enterValue(array);
                 break;
             case 2:
-                printf("Printing array\n");
+                cout <<"2. Display the content of the array" <<endl;
                 printArray(array);
                 break;
             case 3:
-                printf("Dispalaying minimum value\n");
-                min=findMiniumValue(array);
-                printf("Minium is: %d\n",min);
+                cout <<"3. Determine the maximum value" <<endl;
+                max = findMaximumValue(array);
+                cout <<max <<endl;
                 break;
             case 4:
-                printf("Dispalaying maximum value\n");
-                max=findMaximumValue(array);
-                printf("Maximum is: %d\n",max);
+                cout <<"4. Determine the minimum value" <<endl;
+                min = findMiniumValue(array);
+                cout <<min <<endl;
                 break;
             case 5:
-                printf("Dispalaying average value\n");
-                avg=calculateAverage(array);
-                printf("Average is: %f\n",avg);
-                break;
-            case 6:
-                fptr = fopen("array.txt", "w");
-                if (fptr == 0)
-                {
-                    printf("Blad otwierania pliku!\n");
-                    exit(1);
-                }
-                for (int i=0; i < SIZE; ++i) {
-                    fprintf(fptr,"array %d = %d\n", i, *(array + i));
-                }
-                fclose(fptr);
-                break;
-            case 7:
-                char fileLine[10];
-                fptr = fopen("array.txt", "r");
-                if (fptr != 0)
-                {
-                    while (!feof(fptr))
-                    {
-                        fgets(fileLine, 100, fptr);
-                        if (!feof(fptr))
-                        {
-                            puts(fileLine);
-                        }
-                    }
-                }
-                else
-                {
-                    printf("\nBlad otwierania pliku!\n");
-                }
-                fclose(fptr);
-
-                break;
-
-            case 0:
+                cout <<"5. Determine the average value" <<endl;
+                avg = calculateAverage(array);
+                cout <<avg <<endl;
                 break;
             default:
-                printf("Enter correct value");
+                cout <<"choose the right option" <<endl;
+
         }
+    }while (option !=0);
 
-    } while (option != 0);
-
-    printf("The End...");
-    fptr = fopen("array.txt", "w");
+    cout <<"The End";
 
     return 0;
 }
